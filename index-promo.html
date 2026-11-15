@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tailwind Full Screen Video</title>
+    <!-- Include Tailwind CSS via CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="bg-white m-0 p-0 overflow-hidden">
+
+    <!-- Full screen container with a white background -->
+    <div class="w-screen h-screen bg-white flex items-center justify-center overflow-hidden">
+        <video class="w-full h-full object-contain" controls playsinline>
+            <source src="completed_promotional_banner.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+</body>
+</html>

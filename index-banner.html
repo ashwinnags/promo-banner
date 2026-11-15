@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Darque Zone Promotional Video</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            font-family: sans-serif;
+        }
+
+        .video-container {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .video-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        /* Style for a custom unmute/play button */
+        .sound-btn {
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            padding: 12px 24px;
+            background: rgba(0, 0, 0, 0.75);
+            color: #fff;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 16px;
+            z-index: 10;
+            transition: background 0.2s;
+        }
+
+        .sound-btn:hover {
+            background: rgba(0, 0, 0, 0.9);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="video-container">
+        <button id="soundToggle" class="sound-btn">Enable Sound</button>
+
+        <video
+            id="darqueVideo"
+            autoplay
+            playsinline
+            preload="auto"
+        >
+            <source
+                src="animation_for_DARQU-0.mp4"
+                type="video/mp4"
+            >
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <script>
+        const video = document.getElementById("darqueVideo");
+        const soundBtn = document.getElementById("soundToggle");
+
+        // Try playing immediately (browsers usually allow autoplay if muted, 
+        // but since we want sound, we start unmuted and catch any browser block)
+        video.muted = false;
+
+        video.play().catch(error => {
+            console.log("Autoplay with sound was blocked by the browser:", error);
+            // Fallback: If autoplay with sound fails, mute it temporarily and let the video play,
+            // prompting the user to click the button to turn on audio.
+            video.muted = true;
+            video.play();
+            soundBtn.textContent = "Unmute Video";
+        });
+
+        // Toggle sound/play on button click
+        soundBtn.addEventListener("click", () => {
+            if (video.muted) {
+                video.muted = false;
+                soundBtn.textContent = "Mute Sound";
+            } else {
+                video.muted = true;
+                soundBtn.textContent = "Enable Sound";
+            }
+            
+            // Ensure video is playing if it was paused
+            if (video.paused) {
+                video.play();
+            }
+        });
+    </script>
+
+</body>
+</html>
